@@ -60,7 +60,7 @@ class AddPost extends React.Component {
     }
     render() {
         if (this.state.redirect) {
-            return <Redirect to="/" />
+            return <Redirect to="/admin" />
         }
         return (
             <div>
@@ -70,11 +70,11 @@ class AddPost extends React.Component {
                         <form onSubmit={this.handleSubmit}>
                             <div className="form-group">
                                 <label htmlFor="title">Titre</label>
-                                <input type="text" name="title" id="title" value={this.state.post.title} onChange={this.handleChange} className="form-control" />
+                                <input required type="text" name="title" id="title" value={this.state.post.title} onChange={this.handleChange} className="form-control" />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="description">Description</label>
-                                <input type="text" name="description" id="description" value={this.state.post.description} onChange={this.handleChange} className="form-control" />
+                                <input required type="text" name="description" id="description" value={this.state.post.description} onChange={this.handleChange} className="form-control" />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="image" >Image</label>
@@ -86,7 +86,7 @@ class AddPost extends React.Component {
                             }
                             <div className="form-group">
                                 <label htmlFor="content">Contenu</label>
-                                <textarea className="form-control" name="content" rows="8" value={this.state.post.content} onChange={this.handleChange}>
+                                <textarea  required className="form-control" name="content" rows="8" value={this.state.post.content} onChange={this.handleChange}>
 
                                 </textarea>
                             </div>

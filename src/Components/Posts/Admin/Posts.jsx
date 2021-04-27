@@ -23,6 +23,9 @@ class Posts extends Component {
             <div>
                 <HeaderAdmin/>
                 <div className="container">
+                <div className="d-flex justify-content-end mb-5">
+                        <Link to="/admin/post/add"><span className="btn btn-primary">Ajouter Un Article</span></Link>
+                    </div>
                     <table className="table table-borderless text-center table-hover table-striped ">
                         <thead>
                             <tr>

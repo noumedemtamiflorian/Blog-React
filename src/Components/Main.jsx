@@ -21,7 +21,7 @@ const Main = () => {
                 <Route path="/posts/categorie/:id" component={Categories}></Route>
 
                 {/* Route d'administration  pour les articles */}
-                <Route exact path="/admin/posts">< Posts /></Route>
+                <Route exact path="/admin">< Posts /></Route>
                 <Route path="/admin/post/add">< AddPost /></Route>
                 <Route path="/admin/post/:id/edit" component={UpdatePost}></Route>
                 <Route path="/admin/post/:id/delete" component={DeletePost}></Route>

@@ -31,7 +31,7 @@ class AddCategorie extends Component {
     }
     render() {
         if (this.state.redirect) {
-            return <Redirect to="/admin" />
+            return <Redirect to="/admin/categories" />
         }
         return (
             <div>
@@ -41,7 +41,7 @@ class AddCategorie extends Component {
                     <form onSubmit={this.handleSubmit}>
                         <div className="form-group">
                             <label htmlFor="title">Titre</label>
-                            <input type="text" name="title" id="title" value={this.state.categorie.title} onChange={this.handleChange} className="form-control" />
+                            <input type="text" name="title" id="title" value={this.state.categorie.title} onChange={this.handleChange} className="form-control" required />
                         </div>
                         <button type="submit" className="btn btn-primary">Enregistrer</button>
                     </form>

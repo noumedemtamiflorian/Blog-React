@@ -24,7 +24,19 @@ class DeleteCategorie extends Component {
         if (this.state.redirect) {
             return <Redirect to="/admin/categories" />
         }
-        return <h1>Suppression de la categories en cours</h1>
+        return (
+            <div className="d-flex justify-content-center mt-5">
+                <div>
+                    <button class="btn btn-primary" type="button">
+                        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                        <span class="sr-only">Loading...</span>
+                    </button>
+                    <button class="btn btn-primary" type="button">
+                        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>Loading...
+                    </button>
+                </div>
+            </div>
+        )
     }
 }
 
