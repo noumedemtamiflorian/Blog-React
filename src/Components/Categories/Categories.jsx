@@ -53,7 +53,8 @@ class Categories extends Component {
                         <div className="list-group mr-4">
                             {
                                 this.state.categories.map(({ title, id }, index) => {
-                                    return <Link key={id} to={"/posts/categorie/" + id}><span id={id} className="list-group-item list-group-item-action">{title}</span></Link>
+                                    return <Link key={id} to={"/posts/categorie/" + id}><span id={id}
+                                        className={"list-group-item list-group-item-action"}>{title}</span></Link>
                                 })
                             }
                         </div>

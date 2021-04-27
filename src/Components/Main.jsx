@@ -7,6 +7,11 @@ import Posts from './Posts/Admin/Posts'
 import UpdatePost from './Posts/Admin/UpdatePost'
 import DeletePost from './Posts/Admin/DeletePost'
 import Categories from './Categories/Categories'
+import AddCategorie from './Categories/Admin/AddCategorie'
+import CategoriesAdmin from './Categories/Admin/CategoriesAdmin'
+import UpdateCategorie from './Categories/Admin/UpdateCategorie'
+import DeleteCategorie from './Categories/Admin/DeleteCategorie'
+
 const Main = () => {
     return (
         <BrowserRouter>
@@ -16,12 +21,18 @@ const Main = () => {
                 <Route path="/posts/categorie/:id" component={Categories}></Route>
 
                 {/* Route d'administration  pour les articles */}
-                <Route exact path="/admin">< Posts /></Route>
+                <Route exact path="/admin/posts">< Posts /></Route>
                 <Route path="/admin/post/add">< AddPost /></Route>
                 <Route path="/admin/post/:id/edit" component={UpdatePost}></Route>
                 <Route path="/admin/post/:id/delete" component={DeletePost}></Route>
+
+
+                <Route exact path="/admin/categories"><CategoriesAdmin /> </Route>
+                <Route path="/admin/categorie/add">< AddCategorie /></Route>
+                <Route path="/admin/categorie/:id/edit" component={UpdateCategorie}></Route>
+                <Route path="/admin/categorie/:id/delete" component={DeleteCategorie}></Route>
             </Switch>
-        </BrowserRouter>
+        </BrowserRouter >
     )
 }
 export default Main;
