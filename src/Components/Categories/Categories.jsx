@@ -51,6 +51,7 @@ class Categories extends Component {
     }
 
     render() {
+        console.log(this.state.categorie);
         return (
             <div>
                 <Header />
@@ -59,16 +60,6 @@ class Categories extends Component {
                     <article className="col-10  m-auto">
                         <Posts posts={this.state.posts} />
                     </article>
-                    <div id="categories" className="col-sm-5 col-md-4  col-lg-3 col-xl-2">
-                        <h1 className="text-center">Categories</h1>
-                        <div className="list-group mr-4">
-                            {
-                                this.state.categories.map(({ title, id }, index) => {
-                                    return <Link key={id} to={"/posts/categorie/" + id}><span id={id} className="list-group-item list-group-item-action">{title}</span></Link>
-                                })
-                            }
-                        </div>
-                    </div>
                 </main>
                 <footer className="pagination_div">
                     <Pagination

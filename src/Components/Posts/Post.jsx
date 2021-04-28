@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 
-const Post = ({ id, title, image, description }) => {
+const Post = ({ id, title, image, description, categorie }) => {
     console.log(image === '');
     return (
         <div className="row">
@@ -14,6 +14,7 @@ const Post = ({ id, title, image, description }) => {
                             <img src={image} alt="" style={{width: '100%' }} />
                         }
                         <h3 className="card-title my-4 ml-2">{title}</h3>
+                        <h3 className="card-title my-4 ml-2">{categorie.title}</h3>
                         <p className="card-text my-4 ml-2">{description}</p>
                         <p className="text-center"><Link to={"/post/" + id} ><span className="text-white btn btn-primary"> Lire l'article</span></Link></p>
                         

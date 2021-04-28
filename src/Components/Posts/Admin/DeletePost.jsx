@@ -24,7 +24,14 @@ class DeletePost extends Component {
         if (this.state.redirect) {
             return <Redirect to="/admin" />
         }
-        return <h1>Suppression de l'article en cours</h1>
+        return (
+            <div className="container w-100 h-100" style={{ height: '100%' }}>
+                <div className=" mx-auto" style={{ height: '200px', width: '200px', marginTop: '25%'}}>
+                    <img src="/image/audio.svg" alt="" className="bg-danger" style={{width: "100%", borderRadius: '10px 10px'}} />
+                </div>
+
+            </div>
+        )
     }
 }
 

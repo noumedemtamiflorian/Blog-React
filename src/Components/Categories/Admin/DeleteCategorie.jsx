@@ -25,17 +25,11 @@ class DeleteCategorie extends Component {
             return <Redirect to="/admin/categories" />
         }
         return (
-            <div className="d-flex justify-content-center mt-5">
-                <div>
-                    <button className="btn btn-primary" type="button">
-                        <span className="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
-                        <span className="sr-only">Suppresion en cours...</span>
-                    </button>
-                    <button className="btn btn-primary" type="button">
-                        <span className="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
-                        Suppresion en cours...
-                    </button>
+            <div className="container w-100 h-100" style={{ height: '100%' }}>
+                <div className=" mx-auto" style={{ height: '200px', width: '200px', marginTop: '25%' }}>
+                    <img src="/image/audio.svg" alt="" className="bg-danger" style={{ width: "100%", borderRadius: '10px 10px' }} />
                 </div>
+
             </div>
         )
     }

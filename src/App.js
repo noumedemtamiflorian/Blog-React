@@ -43,6 +43,9 @@ class App extends React.Component {
     axios.get("https://127.0.0.1:8000/api/categories")
       .then(res => {
         let donnes = res.data['hydra:member']
+        donnes = donnes.filter((value)=>{
+          return value.articles.length>1
+        })
         this.setState({
           categories: donnes
         })
@@ -62,7 +65,7 @@ class App extends React.Component {
             <h1 className="text-center">Categories</h1>
             <div className="list-group mr-4">
               {
-                this.state.categories.map(({ title, id }, index) => {
+                this.state.categories.map(({ title, id  }) => {
                   return <Link key={id} to={"/posts/categorie/" + id}><span id={id} className="list-group-item list-group-item-action">{title}</span></Link>
                 })
               }
