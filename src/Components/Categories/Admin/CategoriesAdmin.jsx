@@ -1,3 +1,5 @@
+import 'antd/dist/antd.css';
+import { Pagination } from "antd";
 import axios from 'axios';
 import { Component } from 'react'
 import { Link } from 'react-router-dom';
@@ -6,18 +8,33 @@ class CategoriesAdmin extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            categories: [{}]
+            categories: [{}],
+            eltPage: 9,
+            pageCurrent: 1,
+            data: []
         }
     }
     componentDidMount() {
         axios.get("https://127.0.0.1:8000/api/categories")
             .then(res => {
+                let donnes = res.data['hydra:member']
                 this.setState({
-                    categories: res.data['hydra:member']
+                    categories: donnes.slice(0, this.state.eltPage),
+                    data: donnes
                 })
             })
             .catch()
     }
+    handleChange = value => {
+        const { eltPage } = this.state;
+        const indexOfLastLog = value * eltPage;
+        const indexOfFirstLog = indexOfLastLog - eltPage;
+        let data = this.state.data
+        this.setState({
+            currentPage: value,
+            categories: data.slice(indexOfFirstLog, indexOfLastLog)
+        });
+    };
     render() {
         return (
             <div>
@@ -52,6 +69,15 @@ class CategoriesAdmin extends Component {
                         </tbody>
                     </table>
                 </div >
+                <footer className="pagination_div">
+                    <Pagination
+                        defaultCurrent={this.state.pageCurrent}
+                        defaultPageSize={this.state.eltPage} //default size of page
+                        pageSize={this.state.eltPage}
+                        onChange={this.handleChange}
+                        total={/*loadingOk && */this.state.data.length > 0 && this.state.data.length} //total number of card data available
+                    />
+                </footer>
             </div>
 
         )

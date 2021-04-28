@@ -18,7 +18,7 @@ const Main = () => {
             <Switch>
                 <Route exact path="/"><App /></Route>
                 <Route exact path="/post/:id"><Show /></Route>
-                <Route path="/posts/categorie/:id" component={Categories}></Route>
+                <Route  path="/posts/categorie/:id" component={Categories}></Route>
 
                 {/* Route d'administration  pour les articles */}
                 <Route exact path="/admin">< Posts /></Route>
