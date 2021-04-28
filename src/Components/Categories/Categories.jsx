@@ -4,7 +4,6 @@ import { Pagination } from "antd"
 import Header from '../Header/Header';
 import Posts from '../Posts/Posts';
 import 'antd/dist/antd.css';
-import { Link } from 'react-router-dom';
 
 class Categories extends Component {
     constructor(props) {
@@ -46,12 +45,10 @@ class Categories extends Component {
                 this.setState({
                     categories: donnes
                 })
-                console.log(donnes);
             }).catch()
     }
 
     render() {
-        console.log(this.state.categorie);
         return (
             <div>
                 <Header />

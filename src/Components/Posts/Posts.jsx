@@ -10,7 +10,6 @@ const Posts = ({ posts }) => {
                 id={value.id}
                 title={value.title}
                 image={value.image}
-                categorie={value.categorie}
             />
         })
     )

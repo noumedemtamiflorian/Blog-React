@@ -21,10 +21,14 @@ const Show = () => {
             <div className="container">
                 <div className="p-5 w-100 m-auto">
                     <h1 className="text-center mb-4">Article {datas.title}</h1>
-                    <p>{datas.title}</p>
-                    <p className="text-center w-100"> <img src={datas.image} alt="" style={{  width: '100%', height: '400px' ,objectFit: 'cover' }} /> </p>
+                    <p className="mb-4">{datas.title}</p>
+                    {
+                        typeof(datas.image) === 'string' ?
+                            <p className="text-center w-100"> <img src={datas.image} alt="" style={{ width: '100%', height: '400px', objectFit: 'cover' }} /> </p>
+                            : ''
+                    }
                     <p className="mb-4">{datas.description}</p>
-                    <p>{datas.content}</p>
+                    <p className="mb-4">{datas.content}</p>
                 </div>
 
             </div>
