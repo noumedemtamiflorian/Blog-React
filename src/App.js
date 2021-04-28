@@ -1,7 +1,9 @@
 import axios from 'axios';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Pagination } from "antd"
 import './App.css';
+import 'antd/dist/antd.css';
 import Header from './Components/Header/Header';
 import Posts from './Components/Posts/Posts';
 class App extends React.Component {
@@ -10,17 +12,32 @@ class App extends React.Component {
     super(props);
     this.state = {
       posts: [],
-      categories: []
+      categories: [],
+      eltPage: 9,
+      pageCurrent: 1,
+      data: []
+
     }
   }
 
+  handleChange = value => {
+    const { eltPage } = this.state;
+    const indexOfLastLog = value * eltPage;
+    const indexOfFirstLog = indexOfLastLog - eltPage;
+    let data = this.state.data
+    this.setState({
+      currentPage: value,
+      posts: data.slice(indexOfFirstLog, indexOfLastLog)
+    });
+  };
   componentDidMount() {
     // Consommation De l'API REST avec la methode GET numero 1
     axios.get("https://localhost:8000/api/articles")
       .then(res => {
         let donnes = res.data['hydra:member']
         this.setState({
-          posts: donnes
+          posts: donnes.slice(0,this.state.eltPage),
+          data: donnes
         })
       }).catch()
     axios.get("https://127.0.0.1:8000/api/categories")
@@ -52,10 +69,14 @@ class App extends React.Component {
             </div>
           </div>
         </main>
-        <footer>
-          <div className="pagination">
-           
-          </div>
+        <footer className="pagination_div">
+        <Pagination
+            defaultCurrent={this.state.pageCurrent}
+            defaultPageSize={this.state.eltPage} //default size of page
+            pageSize={this.state.eltPage}
+            onChange={this.handleChange}
+            total={/*loadingOk && */this.state.data.length > 0 && this.state.data.length} //total number of card data available
+          />
         </footer>
       </div>
     )

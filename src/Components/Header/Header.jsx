@@ -8,9 +8,7 @@ const Header = () => {
             <Link to="/"> <h1 className="text-warning" >Blog</h1></Link>
             <nav>
                 <ul className="list-unstyled d-flex">
-                <li className="mr-4"><Link to="/">Articles</Link></li>
-                <li className="mr-4"><Link to="/">S'inscrire</Link></li>
-                    <li><Link to="/">Se connecter</Link></li>
+                    <li className="mr-4"><Link to="/">Articles</Link></li>
                 </ul>
             </nav>
         </header>
