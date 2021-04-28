@@ -8,9 +8,9 @@ const HeaderAdmin = () => {
             <Link to="/"> <h1 className="text-warning" >Administration</h1></Link>
             <nav>
                 <ul className="list-unstyled d-flex">
+                    <li className="mr-4"><Link to="/">Acceuil</Link></li>
                     <li className="mr-4"><Link to="/admin">Articles</Link></li>
                     <li className="mr-4"><Link to="/admin/categories">Categories</Link></li>
-                    <li><Link to="/">Se deconnecter</Link></li>
                 </ul>
             </nav>
         </header>
