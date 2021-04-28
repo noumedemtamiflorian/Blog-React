@@ -18,7 +18,6 @@ class App extends React.Component {
     // Consommation De l'API REST avec la methode GET numero 1
     axios.get("https://localhost:8000/api/articles")
       .then(res => {
-        console.log(res.data);
         let donnes = res.data['hydra:member']
         this.setState({
           posts: donnes
@@ -26,7 +25,6 @@ class App extends React.Component {
       }).catch()
     axios.get("https://127.0.0.1:8000/api/categories")
       .then(res => {
-        console.log(res.data);
         let donnes = res.data['hydra:member']
         this.setState({
           categories: donnes
@@ -48,12 +46,17 @@ class App extends React.Component {
             <div className="list-group mr-4">
               {
                 this.state.categories.map(({ title, id }, index) => {
-                  return <Link key={id} to={"/posts/categorie/" + id}><span  id={id} className="list-group-item list-group-item-action">{title}</span></Link>
+                  return <Link key={id} to={"/posts/categorie/" + id}><span id={id} className="list-group-item list-group-item-action">{title}</span></Link>
                 })
               }
             </div>
           </div>
         </main>
+        <footer>
+          <div className="pagination">
+           
+          </div>
+        </footer>
       </div>
     )
   }

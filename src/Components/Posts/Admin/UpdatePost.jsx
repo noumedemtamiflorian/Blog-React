@@ -11,11 +11,14 @@ class UpdatePost extends React.Component {
                 title: '',
                 description: '',
                 content: '',
-                image: ''
+                image: '',
+                categorie: ''
             },
+            categories: [{}],
             file: null,
             redirect: false
-            , id: this.props.match.params.id
+            , id: this.props.match.params.id,
+            idCategorie: null
         }
     }
 
@@ -23,9 +26,17 @@ class UpdatePost extends React.Component {
         const id = this.state.id
         axios.get('https://127.0.0.1:8000/api/articles/' + id)
             .then(res => {
-                this.setState({ post: res.data })
+                console.log(res.data);
+                this.setState({ post: res.data, idCategorie: res.data.categorie })
             }).then(error => {
             })
+        axios.get("https://127.0.0.1:8000/api/categories")
+            .then(res => {
+                this.setState({
+                    categories: res.data['hydra:member']
+                })
+            })
+            .catch()
     }
     handleChange = event => {
         let postTemp = this.state.post
@@ -44,20 +55,18 @@ class UpdatePost extends React.Component {
         const id = this.state.id
         axios.put("https://127.0.0.1:8000/api/articles/" + id, this.state.post)
             .then(res => {
-
+                this.setState({
+                    redirect: true
+                })
             })
             .catch(error => {
             })
-        this.setState({
-            redirect: true
-        })
         event.preventDefault()
     }
     render() {
         if (this.state.redirect) {
             return <Redirect to="/admin" />
         }
-        console.log(this.state.post.image !== '');
         return (
             <div>
                 <HeaderAdmin />
@@ -72,6 +81,18 @@ class UpdatePost extends React.Component {
                                 <label htmlFor="description">Description</label>
                                 <input type="text" name="description" id="description" value={this.state.post.description} onChange={this.handleChange} className="form-control" />
                             </div>
+
+                            <div className="form-group">
+                                <label htmlFor="categorie">Categorie</label>
+                                <select className="form-control" name="categorie" id="categorie" onChange={this.handleChange}>
+                                    {
+                                        this.state.categories.map((value, index) => {
+                                            return (<option key={index} selected={value['@id'] === this.state.idCategorie ? true : false} value={value['@id']}>{value.title}</option>)
+                                        })
+                                    }
+                                </select>
+                            </div>
+
                             <div className="form-group">
                                 <label htmlFor="image" >Image</label>
                                 <input className="form-control" type="file" name="image" id="image" onChange={this.handleChange} />

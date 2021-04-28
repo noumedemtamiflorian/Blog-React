@@ -27,12 +27,13 @@ class DeleteCategorie extends Component {
         return (
             <div className="d-flex justify-content-center mt-5">
                 <div>
-                    <button class="btn btn-primary" type="button">
-                        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
-                        <span class="sr-only">Loading...</span>
+                    <button className="btn btn-primary" type="button">
+                        <span className="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                        <span className="sr-only">Suppresion en cours...</span>
                     </button>
-                    <button class="btn btn-primary" type="button">
-                        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>Loading...
+                    <button className="btn btn-primary" type="button">
+                        <span className="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                        Suppresion en cours...
                     </button>
                 </div>
             </div>

@@ -17,7 +17,7 @@ const Main = () => {
         <BrowserRouter>
             <Switch>
                 <Route exact path="/"><App /></Route>
-                <Route exact path="/posts/:id"><Show /></Route>
+                <Route exact path="/post/:id"><Show /></Route>
                 <Route path="/posts/categorie/:id" component={Categories}></Route>
 
                 {/* Route d'administration  pour les articles */}
