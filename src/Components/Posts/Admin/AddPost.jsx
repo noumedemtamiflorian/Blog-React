@@ -30,7 +30,7 @@ class AddPost extends React.Component {
                 })
             })
             .catch()
-            
+
     }
     handleChange = event => {
         let postTemp = this.state.post
@@ -51,7 +51,7 @@ class AddPost extends React.Component {
                 this.setState({
                     redirect: true
                 })
-             })
+            })
             .catch(error => { })
     }
     handleSubmit = (event) => {
@@ -67,15 +67,24 @@ class AddPost extends React.Component {
                         post: postTemp
                     })
                     this.RegisterData(this.state.post)
-                }).catch(erreur => { 
+                }).catch(erreur => {
                     console.log(erreur);
                 });
         }
         else {
             this.RegisterData(this.state.post)
         }
-        console.log(this.state.post);
         event.preventDefault()
+    }
+    handleDelete = event => {
+        let postTemp = this.state.post
+        let fileTemp = this.state.file
+        fileTemp = null
+        postTemp.image = ''
+        this.setState({
+            post: postTemp,
+            file: fileTemp
+        })
     }
     render() {
         if (this.state.redirect) {
@@ -110,8 +119,18 @@ class AddPost extends React.Component {
                                 <input className="form-control" type="file" name="image" id="image" onChange={this.handleChange} />
                             </div>
                             {
-                                this.state.file !== null &&
-                                <img src={this.state.file} alt="" style={{ width: '20%' }} />
+                                this.state.file !== null ?
+                                    <div>
+                                        <img src={this.state.file} alt="" style={{ width: '20%' }} className="mr-3" />
+                                        <button type="button" onClick={this.handleDelete} className="btn btn-danger">x</button>
+                                    </div>
+                                    :
+                                    this.state.post.image !== '' ?
+                                        <div>
+                                            <img src={this.state.post.image} alt="" style={{ width: '20%' }} className="mr-3" />
+                                            <button type="button" onClick={this.handleDelete} className="btn btn-danger">x</button>
+                                        </div> :
+                                        ""
                             }
                             <div className="form-group">
                                 <label htmlFor="content">Contenu</label>

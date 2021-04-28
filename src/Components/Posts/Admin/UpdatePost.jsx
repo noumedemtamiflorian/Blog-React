@@ -43,6 +43,20 @@ class UpdatePost extends React.Component {
         if (event.target.name === "image") {
             postTemp[event.target.name] = event.target.files[0]
             this.setState({ file: URL.createObjectURL(event.target.files[0]) })
+            const formData = new FormData();
+            formData.append('file', event.target.files[0]);
+            formData.append('upload_preset', 'f9dkjbxa')
+            axios.post('https://api.cloudinary.com/v1_1/noumedemtamiflorian/image/upload', formData)
+                .then(res => {
+                    let postTemp = this.state.post
+                    postTemp.image = res.data.url
+                    this.setState({
+                        post: postTemp
+                    })
+                    // this.RegisterData(this.state.post)
+                }).catch(erreur => {
+                    console.log(erreur);
+                });
         } else {
             postTemp[event.target.name] = event.target.value
         }
@@ -50,10 +64,9 @@ class UpdatePost extends React.Component {
             post: postTemp
         })
     }
-
-    handleSubmit = (event) => {
+    RegisterData(post) {
         const id = this.state.id
-        axios.put("https://127.0.0.1:8000/api/articles/" + id, this.state.post)
+        axios.put("https://127.0.0.1:8000/api/articles/" + id, post)
             .then(res => {
                 this.setState({
                     redirect: true
@@ -61,7 +74,38 @@ class UpdatePost extends React.Component {
             })
             .catch(error => {
             })
+    }
+    handleSubmit = (event) => {
+        if (this.state.file !== null) {
+            const formData = new FormData();
+            formData.append('file', this.state.post.image);
+            formData.append('upload_preset', 'f9dkjbxa')
+            axios.post('https://api.cloudinary.com/v1_1/noumedemtamiflorian/image/upload', formData)
+                .then(res => {
+                    let postTemp = this.state.post
+                    postTemp.image = res.data.url
+                    this.setState({
+                        post: postTemp
+                    })
+                    this.RegisterData(this.state.post)
+                }).catch(erreur => {
+                    console.log(erreur);
+                });
+        }
+        else {
+            this.RegisterData(this.state.post)
+        }
         event.preventDefault()
+    }
+    handleDelete = event => {
+        let postTemp = this.state.post
+        let fileTemp = this.state.file
+        fileTemp = null
+        postTemp.image = ''
+        this.setState({
+            post: postTemp,
+            file: fileTemp
+        })
     }
     render() {
         if (this.state.redirect) {
@@ -99,8 +143,17 @@ class UpdatePost extends React.Component {
                             </div>
                             {
                                 this.state.file !== null ?
-                                    <img src={this.state.file} alt="" style={{ width: '20%' }} /> :
-                                    <img src={this.state.post.image} alt="" style={{ width: '20%' }} />
+                                    <div>
+                                        <img src={this.state.file} alt="" style={{ width: '20%' }} className="mr-3" />
+                                        <button type="button" onClick={this.handleDelete} className="btn btn-danger">x</button>
+                                    </div>
+                                    :
+                                    this.state.post.image !== '' ?
+                                        <div>
+                                            <img src={this.state.post.image} alt="" style={{ width: '20%' }} className="mr-3" />
+                                            <button type="button" onClick={this.handleDelete} className="btn btn-danger">x</button>
+                                        </div> :
+                                        ""
                             }
                             <div className="form-group">
                                 <label htmlFor="content">Contenu</label>
