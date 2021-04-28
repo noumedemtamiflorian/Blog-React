@@ -1,3 +1,5 @@
+import 'antd/dist/antd.css';
+import { Pagination } from "antd";
 import axios from 'axios';
 import { Component } from 'react'
 import { Link } from 'react-router-dom';
@@ -6,24 +8,40 @@ class Posts extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            logements: [{}]
+            posts: [{}],
+            eltPage: 9,
+            pageCurrent: 1,
+            data: []
         }
     }
     componentDidMount() {
         axios.get("https://127.0.0.1:8000/api/articles")
             .then(res => {
+                let donnes = res.data['hydra:member']
                 this.setState({
-                    logements: res.data['hydra:member']
+                    posts: donnes.slice(0, this.state.eltPage),
+                    data: donnes
                 })
             })
             .catch()
     }
+    handleChange = value => {
+        const { eltPage } = this.state;
+        const indexOfLastLog = value * eltPage;
+        const indexOfFirstLog = indexOfLastLog - eltPage;
+        let data = this.state.data
+        this.setState({
+            currentPage: value,
+            posts: data.slice(indexOfFirstLog, indexOfLastLog)
+        });
+    };
     render() {
+        console.log(this.state.data);
         return (
             <div>
-                <HeaderAdmin/>
+                <HeaderAdmin />
                 <div className="container">
-                <div className="d-flex justify-content-end mb-5">
+                    <div className="d-flex justify-content-end mb-5">
                         <Link to="/admin/post/add"><span className="btn btn-primary">Ajouter Un Article</span></Link>
                     </div>
                     <table className="table table-borderless text-center table-hover table-striped ">
@@ -36,7 +54,7 @@ class Posts extends Component {
                         </thead>
                         <tbody>
                             {
-                                this.state.logements.map(({ id, title, description }, index) => {
+                                this.state.posts.map(({ id, title, description }, index) => {
                                     return (
                                         <tr key={index}>
                                             <td>{title}</td>
@@ -52,6 +70,15 @@ class Posts extends Component {
                         </tbody>
                     </table>
                 </div >
+                <footer className="pagination_div">
+                    <Pagination
+                        defaultCurrent={this.state.pageCurrent}
+                        defaultPageSize={this.state.eltPage} //default size of page
+                        pageSize={this.state.eltPage}
+                        onChange={this.handleChange}
+                        total={/*loadingOk && */this.state.data.length > 0 && this.state.data.length} //total number of card data available
+                    />
+                </footer>
             </div>
 
         )

@@ -67,7 +67,9 @@ class AddPost extends React.Component {
                         post: postTemp
                     })
                     this.RegisterData(this.state.post)
-                }).catch(erreur => { });
+                }).catch(erreur => { 
+                    console.log(erreur);
+                });
         }
         else {
             this.RegisterData(this.state.post)
