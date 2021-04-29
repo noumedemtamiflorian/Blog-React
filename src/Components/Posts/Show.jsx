@@ -23,7 +23,7 @@ const Show = () => {
                     <h1 className="text-center mb-4">Article {datas.title}</h1>
                     <p className="mb-4">{datas.title}</p>
                     {
-                        typeof(datas.image) === 'string' ?
+                    datas.image !== '' ?
                             <p className="text-center w-100"> <img src={datas.image} alt="" style={{ width: '100%', height: '400px', objectFit: 'cover' }} /> </p>
                             : ''
                     }
